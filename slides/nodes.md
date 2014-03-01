@@ -11,8 +11,9 @@
 
 ## Basics
 * Read-Eval-Print loop - console
-..* Simply run `node` at the command line to launch node in this mode.
+	* Simply run `node` at the command line to launch node in this mode.
 * If you only need a couple of statements you can launch node in an non-interactive mode with a a list of statments using `node -e "..."`.
+	* Example:
 
 ```
 $ node -e "console.log(3 + 6); console.log(new Date());"
@@ -20,5 +21,6 @@ $ node -e "console.log(3 + 6); console.log(new Date());"
 Sat Mar 01 2014 10:09:23 GMT-0600 (CST)
 ```
 
+* The way we will be using node is to lauch it by running a JavaScript file: `node someFile.js`
 
 ## NPM
