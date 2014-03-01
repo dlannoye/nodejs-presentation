@@ -24,7 +24,7 @@ Sat Mar 01 2014 10:09:23 GMT-0600 (CST)
 * The way we will be using node is to lauch it by running a JavaScript file: `node someFile.js`
 
 ### Differences from running JS in the browser
-* In the browser we have `window` and `document` objects. Those framilar with browser JS will under stand why these don't exist in node. In browser based JS the variables in the global scope are places on the `window` object in node they are placed on the `global` object. node also offers the `[console](http://nodejs.org/api/console.html)` object.
+* In the browser we have `window` and `document` objects. Those framilar with browser JS will under stand why these don't exist in node. In browser based JS the variables in the global scope are places on the `window` object in node they are placed on the `global` object. node also offers the [`console`](http://nodejs.org/api/console.html) object.
 
 * In the browser there isn't a language feature to include modules, there are some libraries that try to saome this like CommonJS and RequireJS.
 
