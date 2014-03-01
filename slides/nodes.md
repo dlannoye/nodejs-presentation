@@ -1,0 +1,5 @@
+#Notes
+
+##Orgins
+* Node's goal is to provide an easy way to build scalable network programs
+* 
