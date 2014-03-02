@@ -13,3 +13,8 @@ if (a) {
 // Declaring this here so we don't get reference errors, but can show that the
 // variable defined in the module didn't leak to this context.
 var a;
+
+var moduleB = require("./moduleB.js");
+
+moduleB.functionB();
+console.log(moduleB.propertyB);
