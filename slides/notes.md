@@ -34,7 +34,7 @@ Sat Mar 01 2014 10:09:23 GMT-0600 (CST)
 	* For [core modules](http://nodejs.org/api/) you can simply reference them by name: `var someVar = require('http');`
 
 ##### Defining your own modules
-
+* In your modules you can export functionality by either adding a property on the `exports` object or by setting `module.exports` to the object you want to export.
 
 
 ## NPM
