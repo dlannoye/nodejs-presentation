@@ -1,6 +1,6 @@
 # Notes
 
-## Orgins
+## Origins
 * Node's goal is to provide an easy way to build scalable network programs
 * Node doesn't have locks
 * Build on top of Google's V8 engine and its ECMAScript (Javascript).
