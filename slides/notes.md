@@ -2,9 +2,28 @@
 
 ## Origins
 * Node's goal is to provide an easy way to build scalable network programs
+* Your code runs on a single thread
 * Node doesn't have locks
 * Build on top of Google's V8 engine and its ECMAScript (Javascript).
-* Almost no functions in node directly perform I/O so nothing blocks
+* Almost no functions in node directly perform I/O so there are very few calls that block.
+* Based around the idea that running is code is cheap, but I/O is is not. So to work around this I/O is done asynchronous and callbacks are used so your code can keep running instead of blocking for I/O.
+``` Traditional I/O
+var file = readFile("filename.txt");
+doSomethingWithFile(file);
+// ...other code
+```
+
+``` Async I/O
+readFile("filename.txt", function(file){
+	doSomethingWithFile(file);
+});
+// ...other code
+```
+* For example some systems might do a thread per connection, but the threads would sit idle while waiting for results. 
+	* Because of the overhead of threading and some of the sitting idele waiting for I/O you don't ge the performance you should
+	* Bring up example of Apache vs. NGINX from JSConf slides.
+* Node isn't great for CPU intensive tasks... image processing, calculating the billionth digit of pi, etc.
+
 * Uses an event loop as a language construct rather than a library providing it.
 * Node runs the initial script and then enters the event loop. The event loop continues to run untill there are no remaining callbacks.
 * Unlike other similar libraries (Ruby's Event Machine or Python's Twisted) you don't have to start the event loop throught a blocking call like `EventMachine::run()`. Just like browser javascript the event loop is hidden from the user.
@@ -38,3 +57,9 @@ Sat Mar 01 2014 10:09:23 GMT-0600 (CST)
 
 
 ## NPM
+
+
+#Resources
+* [Offical Node Docs](http://nodejs.org/api/)
+* [Slides introducing node.js from JSCOnf '09](http://s3.amazonaws.com/four.livejournal/20091117/jsconf.pdf)
+* [Understanding the node.js event loop](http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/)
