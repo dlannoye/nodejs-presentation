@@ -7,13 +7,18 @@
 * Build on top of Google's V8 engine and its ECMAScript (Javascript).
 * Almost no functions in node directly perform I/O so there are very few calls that block.
 * Based around the idea that running is code is cheap, but I/O is is not. So to work around this I/O is done asynchronous and callbacks are used so your code can keep running instead of blocking for I/O.
-``` Traditional I/O
+ 
+Traditional I/O
+
+``` 
 var file = readFile("filename.txt");
 doSomethingWithFile(file);
 // ...other code
 ```
 
-``` Async I/O
+Async I/O
+
+``` 
 readFile("filename.txt", function(file){
 	doSomethingWithFile(file);
 });
