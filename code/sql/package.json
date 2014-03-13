@@ -1,0 +1,9 @@
+{
+  "name": "sqliteSample",
+  "version": "0.0.0",
+  "description": "",
+  "main": "sqliteNodeTest.js",
+  "dependencies": {
+    "sqlite3": "~2.2.0"
+  },
+}
