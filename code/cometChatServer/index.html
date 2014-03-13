@@ -2,35 +2,24 @@
 <html>
 <head>
   <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
-  <script>
-  $(function() {
-
-    $('.messages').text('Loading ...');
-
-    $('button').click(function() {
-        var message = $('#message').val();
-        $('#message').val('');
-        var url = '/send?value=' + encodeURIComponent(message);
-        $.get(url);
-    });
-
-    var getMessages = function() {
-        $.getJSON('/get', function(data){
-          $('.messages').text(data.messages);
-
-          // Initiate the next round of the long poll
-          getMessages();
-        });
-    }
-
-    getMessages();
-
+  
+<script src="/socket.io/socket.io.js"></script>
+<script>
+$(function(){
+  var socket = io.connect('http://localhost');
+  socket.on('newMessage', function (data) {
+    $('#messages').append('<div>' + data + '</div>')
   });
-  </script>
+
+  $('button').click(function() {
+    socket.emit('send', $('#message').val());
+  });
+});
+</script>
 </head>
 <body>
   <div>Recieved Messages:</div>
-  <div class="messages"></div>
+  <div id="messages"></div>
   <hr/>
   <div>Send a message:</div>
   <input id="message"></input>

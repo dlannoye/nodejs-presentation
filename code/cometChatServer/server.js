@@ -1,45 +1,28 @@
 // A simple chat application.
-// Messages are sent to the client with a comet request via long polling (http://en.wikipedia.org/wiki/Comet_(programming)#Ajax_with_long_polling)
-// No libraries outside of the core node libraries are used.
 
 var http = require('http');
 var fs = require('fs');
-var url = require('url');
+var socketio = require('socket.io'); 
 
-// Just store all of the messages in an array.
-var messages = [];
-var requests = [];
+var app = http.createServer(function (req, res) {
+  fs.readFile('./index.html', function(err, data) {
+    if (err) throw err;
+    res.end(data);
+  });
+});
 
-http.createServer(function (req, res) {
-  var parsedUrl = url.parse(req.url, true);
-  if (parsedUrl.pathname == '/') {
-    fs.readFile('./index.html', function(err, data) {
-      if (err) throw err;
-      res.end(data);
-    });
-  } else if (parsedUrl.pathname == '/get') {
-    requests.push({
-      time: new Date(),
-      request: res,
-    });
-  } else if (parsedUrl.pathname == '/send') {
-    var query = parsedUrl.query;
-    var message = decodeURIComponent(query.value);
-    messages.push(message);
+app.listen(1337, 'localhost');
+var io = socketio.listen(app);
 
-    pushMessages();
-    res.end();
-  }
-  return;
+io.sockets.on('connection', function(socket) {
+  socket.on('send', function(data){
+    
+    // Send to all connections
+    io.sockets.emit('newMessage', data);
 
-}).listen(1337, "127.0.0.1");
-console.log('Server running at http://127.0.0.1:1337/');
+    // Send to just the other connecitons
+    //socket.broadcast.emit('newMessage', data);
+  });
+});
 
-var pushMessages = function() {
-  while(requests.length > 0) {
-    var request = requests.pop().request;
-    request.end(JSON.stringify({
-      messages: messages,
-    }));
-  }
-};
+console.log('Server running at http:/localhost:1337/');
